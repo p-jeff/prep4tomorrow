@@ -1,25 +1,40 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
-import { MapControls, Plane, Select, useSelect, Edges } from '@react-three/drei';
-import { useState } from 'react';
-
+import { MapControls, Plane, Select, useSelect } from '@react-three/drei';
+import { useState, useRef } from 'react';
+import { BoxGeometry, Matrix4, Vector3 } from 'three';
 
 function degreeToRad(degrees) {
   return degrees * (Math.PI / 180);
 }
 
-// Thanks chatGPT
+
 //this function checks if an object is selected -> and returns the tag of the selected object
 
 function logObjectIfDefined(obj) {
-  let current
   if (typeof obj === 'object' && obj !== null) {
-    current = obj.tag
     // console.log(obj);
-    return current
+    return obj
   } else {
     //console.log('Object is not defined');
     return 'none'
+  }
+}
+
+function boundingBox(ref) {
+  if (ref.geometry !== undefined) {
+    ref.geometry.computeBoundingBox() //initially computing a bounding box
+    let box3 = ref.geometry.boundingBox
+
+    //box 3 only has min and max vectors, the following will make a float32array out of the initial 2 vectors
+    const dimensions = new Vector3().subVectors(box3.max, box3.min);
+    const boxGeo = new BoxGeometry(dimensions.x, dimensions.y, dimensions.z);
+
+    // move new mesh center so it's aligned with the original object
+    const matrix = new Matrix4().setPosition(dimensions.addVectors(box3.min, box3.max).multiplyScalar(0.5));
+    boxGeo.applyMatrix4(matrix);
+
+    return boxGeo
   }
 }
 
@@ -31,27 +46,38 @@ function MyTorus({ ...props }) {
   let current = logObjectIfDefined(selected[0])
   // tag is going to be identifier of shown text
 
-  let isSelected = current === props.tag
+  let isSelected = current.tag === props.tag
+  let myRef = useRef()
+
+  let checkedRef = logObjectIfDefined(myRef.current)
+  let box = boundingBox(checkedRef)
+  console.log(box)
 
 
   return (
-    <mesh {...props}>
-      <torusGeometry />
-      <meshNormalMaterial />
+    <group>
+      <mesh {...props} ref={myRef}>
+        <torusGeometry />
+        <meshNormalMaterial />
 
-      {/*
+        {/*
       Replace with bounding box
-      <Edges visible={isSelected} scale={1.1} renderOrder={1000}>
-        <meshBasicMaterial transparent color="#333" depthTest={false} />
-  </Edges>
+     
   */}
-    </mesh>
+      </mesh>
+      {isSelected ? <mesh geometry={box} {...props}>
+        <meshStandardMaterial wireframe />
+      </mesh> : <></>}
+
+
+
+    </group >
   )
 }
 /* */
 
 function App() {
-  const [selected, setSelected] = useState([])
+  const [, setSelected] = useState([])
 
   return (
     <div className='App'>
