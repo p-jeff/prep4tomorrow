@@ -1,6 +1,6 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
-import { MapControls, Plane, Select, useSelect } from '@react-three/drei';
+import { MapControls, Plane, Select, useFBX, useSelect } from '@react-three/drei';
 import { useState, useRef } from 'react';
 import { BoxGeometry, Matrix4, Vector3 } from 'three';
 
@@ -10,6 +10,7 @@ function degreeToRad(degrees) {
 
 
 //this function checks if an object is selected -> and returns the tag of the selected object
+//probably a better way to do this tbh (or to avoid completely)
 
 function logObjectIfDefined(obj) {
   if (typeof obj === 'object' && obj !== null) {
@@ -37,10 +38,22 @@ function boundingBox(ref) {
     return boxGeo
   }
 }
-
+/*
+function SuzanneFBX() {
+  let fbx = useFBX('untitled.fbx')
+  return <primitive object={fbx} />
+} 
+*/
 
 // useSelect needs to be in a Child of <Select> 
 function MyTorus({ ...props }) {
+
+  /* 
+  let x;
+   x = SuzanneFBX()
+   console.log(x)
+   */
+
   const selected = useSelect()
 
   let current = logObjectIfDefined(selected[0])
@@ -59,11 +72,6 @@ function MyTorus({ ...props }) {
       <mesh {...props} ref={myRef}>
         <torusGeometry />
         <meshNormalMaterial />
-
-        {/*
-      Replace with bounding box
-     
-  */}
       </mesh>
       {isSelected ? <mesh geometry={box} {...props}>
         <meshStandardMaterial wireframe />
