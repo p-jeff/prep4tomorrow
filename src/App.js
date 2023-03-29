@@ -38,21 +38,20 @@ function boundingBox(ref) {
     return boxGeo
   }
 }
+
 /*
 function SuzanneFBX() {
   let fbx = useFBX('untitled.fbx')
   return <primitive object={fbx} />
-} 
+}
 */
 
 // useSelect needs to be in a Child of <Select> 
 function MyTorus({ ...props }) {
 
-  /* 
-  let x;
-   x = SuzanneFBX()
-   console.log(x)
-   */
+  /*let x;
+  x = SuzanneFBX()
+  console.log(x)*/
 
   const selected = useSelect()
 
@@ -76,9 +75,6 @@ function MyTorus({ ...props }) {
       {isSelected ? <mesh geometry={box} {...props}>
         <meshStandardMaterial wireframe />
       </mesh> : <></>}
-
-
-
     </group >
   )
 }
