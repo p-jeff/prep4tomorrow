@@ -1,13 +1,13 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
-import { MapControls, Plane, Select, useFBX, useSelect } from '@react-three/drei';
+import { MapControls, Plane, Select, useFBX, useSelect, Edges } from '@react-three/drei';
 import { useState, useRef } from 'react';
-import { BoxGeometry, Matrix4, Vector3 } from 'three';
+import { BoxGeometry, EdgesGeometry, Matrix4, Vector3 } from 'three';
+import Content from './Content';
 
 function degreeToRad(degrees) {
   return degrees * (Math.PI / 180);
 }
-
 
 //this function checks if an object is selected -> and returns the tag of the selected object
 //probably a better way to do this tbh (or to avoid completely)
@@ -54,7 +54,6 @@ function MyTorus({ ...props }) {
   console.log(x)*/
 
   const selected = useSelect()
-
   let current = logObjectIfDefined(selected[0])
   // tag is going to be identifier of shown text
 
@@ -63,38 +62,47 @@ function MyTorus({ ...props }) {
 
   let checkedRef = logObjectIfDefined(myRef.current)
   let box = boundingBox(checkedRef)
-  console.log(box)
+  //console.log(box)
 
 
   return (
     <group>
-      <mesh {...props} ref={myRef}>
+      <mesh {...props} ref={myRef} >
         <torusGeometry />
         <meshNormalMaterial />
       </mesh>
-      {isSelected ? <mesh geometry={box} {...props}>
-        <meshStandardMaterial wireframe />
-      </mesh> : <></>}
+      {isSelected ? <Edges geometry={box} {...props}>
+        <meshStandardMaterial />
+      </Edges> : <></>}
     </group >
   )
 }
-/* */
 
 function App() {
-  const [, setSelected] = useState([])
+  const [selected, setSelected] = useState([])
+
 
   return (
     <div className='App'>
-      <Canvas camera={{ position: [5, 5, 0] }} >
-        <MapControls />
-        <ambientLight intensity={0.1} />
-        <Plane args={[10, 10, 10]} rotation={[degreeToRad(-90), 0, 0]} />
-        <Select box multiple onChange={setSelected}>
-          <MyTorus scale={0.9} position={[-1, 0, 0]} tag={22} />
-          <MyTorus scale={0.9} position={[1, 0, 0]} tag={23} />
-        </Select>
-      </Canvas>
-    </ div >
+      <div className='canvas'>
+        <Canvas camera={{ position: [5, 5, 0] }} >
+          <MapControls />
+          <ambientLight intensity={0.1} />
+          <Plane args={[10, 10, 10]} rotation={[degreeToRad(-90), 0, 0]} />
+          <Select box multiple onChange={setSelected}>
+            <MyTorus scale={0.9} position={[-1, 0, 0]} tag={22} />
+            <MyTorus scale={0.9} position={[1, 0, 0]} tag={'circus'} />
+          </Select>
+        </Canvas>
+      </div>
+      {selected.length === 1 && <>
+        {/*will only render when length is exactly 1 -> this happens once something is selected */}
+        <div className='content'>
+          <Content /> </div>
+        <button onClick={() => setSelected([])} className='cancel'>X</button>
+      </>}
+    </div >
+
   );
 }
 
