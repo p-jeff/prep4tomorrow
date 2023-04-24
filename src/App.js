@@ -1,82 +1,45 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
-import { MapControls, Plane, Select, useFBX, useSelect, Edges } from '@react-three/drei';
+import { MapControls, Plane, Select, useFBX, useHelper } from '@react-three/drei';
 import { useState, useRef } from 'react';
-import { BoxGeometry, EdgesGeometry, Matrix4, Vector3 } from 'three';
+import { DirectionalLightHelper } from 'three';
+
 import Content from './Content';
+import { EffectComposer, Outline } from '@react-three/postprocessing';
 
 function degreeToRad(degrees) {
   return degrees * (Math.PI / 180);
 }
 
-//this function checks if an object is selected -> and returns the tag of the selected object
-//probably a better way to do this tbh (or to avoid completely)
-
-function logObjectIfDefined(obj) {
-  if (typeof obj === 'object' && obj !== null) {
-    // console.log(obj);
-    return obj
-  } else {
-    //console.log('Object is not defined');
-    return 'none'
-  }
-}
-
-function boundingBox(ref) {
-  if (ref.geometry !== undefined) {
-    ref.geometry.computeBoundingBox() //initially computing a bounding box
-    let box3 = ref.geometry.boundingBox
-
-    //box 3 only has min and max vectors, the following will make a float32array out of the initial 2 vectors
-    const dimensions = new Vector3().subVectors(box3.max, box3.min);
-    const boxGeo = new BoxGeometry(dimensions.x, dimensions.y, dimensions.z);
-
-    // move new mesh center so it's aligned with the original object
-    const matrix = new Matrix4().setPosition(dimensions.addVectors(box3.min, box3.max).multiplyScalar(0.5));
-    boxGeo.applyMatrix4(matrix);
-
-    return boxGeo
-  }
-}
-
-/*
-function SuzanneFBX() {
-  let fbx = useFBX('untitled.fbx')
-  return <primitive object={fbx} />
-}
-*/
-
 // useSelect needs to be in a Child of <Select> 
-function MyTorus({ ...props }) {
+function MyTorus({ url, ...props }) {
 
-  /*let x;
-  x = SuzanneFBX()
-  console.log(x)*/
 
-  const selected = useSelect()
-  let current = logObjectIfDefined(selected[0])
-  // tag is going to be identifier of shown text
-
-  let isSelected = current.tag === props.tag
-  let myRef = useRef()
-
-  let checkedRef = logObjectIfDefined(myRef.current)
-  let box = boundingBox(checkedRef)
   //console.log(box)
 
+  const model = useFBX(url);
+  const modelRef = useRef();
 
   return (
-    <group>
-      <mesh {...props} ref={myRef} >
-        <torusGeometry />
-        <meshNormalMaterial />
-      </mesh>
-      {isSelected ? <Edges geometry={box} {...props}>
-        <meshStandardMaterial />
-      </Edges> : <></>}
-    </group >
+
+    <mesh {...props} ref={modelRef} >
+      <primitive object={model} />
+    </mesh>
+
+
   )
 }
+
+const Light = () => {
+  const dirLight = useRef()
+  useHelper(dirLight, DirectionalLightHelper, "red");
+
+  return (
+    <>
+      <directionalLight color={"#fefeef"} intensity={1} ref={dirLight} position={[5, 5, -5]} castShadow />
+    </>
+  );
+};
 
 function App() {
   const [selected, setSelected] = useState([])
@@ -87,18 +50,28 @@ function App() {
       <div className='canvas'>
         <Canvas camera={{ position: [5, 5, 0] }} >
           <MapControls />
-          <ambientLight intensity={0.1} />
-          <Plane args={[10, 10, 10]} rotation={[degreeToRad(-90), 0, 0]} />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[1, 1, 1]} intensity={100} />
+          <Plane receiveShadow args={[100, 100, 100]} rotation={[degreeToRad(-90), 0, 0]}>
+            <meshBasicMaterial color={"#fff"} />
+
+          </Plane>
           <Select box multiple onChange={setSelected}>
-            <MyTorus scale={0.9} position={[-1, 0, 0]} tag={22} />
-            <MyTorus scale={0.9} position={[1, 0, 0]} tag={'circus'} />
+            <MyTorus recieveShadow scale={0.03} position={[0, 0.1, 0]} tag={'circus'} url={"/objects/test3.fbx"} />
+            <MyTorus recieveShadow scale={0.003} position={[-2, 0.2, -2]} tag={'circus'} url={"/objects/test4.fbx"} />
           </Select>
+
+          <Light />
+          <EffectComposer multisampling={0} autoClear={false}>
+            <Outline selection={selected} visibleEdgeColor="white" hiddenEdgeColor="white" blur edgeStrength={100} />
+          </EffectComposer>
         </Canvas>
       </div>
       {selected.length === 1 && <>
         {/*will only render when length is exactly 1 -> this happens once something is selected */}
         <div className='content'>
-          <Content /> </div>
+          <Content object={selected} />
+        </div>
         <button onClick={() => setSelected([])} className='cancel'>X</button>
       </>}
     </div >

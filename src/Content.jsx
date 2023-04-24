@@ -2,9 +2,17 @@ import './App.css';
 import ReactMarkdown from 'react-markdown';
 import { useState, useEffect } from 'react';
 
-export default function Content() {
-    let url = "/markdown/circus.md"
+
+
+export default function Content(object) {
+
+    let insert = object.object[0].name
+    let url = "/markdown/" + insert + ".md"
+
+    console.log(url)
+
     const [markdown, setMarkdown] = useState('');
+
 
     useEffect(() => {
         async function fetchData() {
