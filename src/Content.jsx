@@ -8,9 +8,6 @@ export default function Content(object) {
 
     let insert = object.object[0].name
     let url = "/markdown/" + insert + ".md"
-
-    console.log(url)
-
     const [markdown, setMarkdown] = useState('');
 
 

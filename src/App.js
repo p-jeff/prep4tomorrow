@@ -1,11 +1,12 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
-import { MapControls, Plane, Select, useFBX, useHelper } from '@react-three/drei';
+import { Environment, MapControls, OrbitControls, Plane, Select, useFBX, useHelper } from '@react-three/drei';
 import { useState, useRef } from 'react';
 import { DirectionalLightHelper } from 'three';
 
 import Content from './Content';
-import { EffectComposer, Outline } from '@react-three/postprocessing';
+import { EffectComposer, Outline, SMAA } from '@react-three/postprocessing';
+import { BlendFunction, KernelSize } from 'postprocessing'
 
 function degreeToRad(degrees) {
   return degrees * (Math.PI / 180);
@@ -13,20 +14,13 @@ function degreeToRad(degrees) {
 
 // useSelect needs to be in a Child of <Select> 
 function MyTorus({ url, ...props }) {
-
-
-  //console.log(box)
-
   const model = useFBX(url);
   const modelRef = useRef();
 
   return (
-
     <mesh {...props} ref={modelRef} >
       <primitive object={model} />
     </mesh>
-
-
   )
 }
 
@@ -49,21 +43,18 @@ function App() {
     <div className='App'>
       <div className='canvas'>
         <Canvas camera={{ position: [5, 5, 0] }} >
-          <MapControls />
+          <OrbitControls />
           <ambientLight intensity={0.5} />
-          <pointLight position={[1, 1, 1]} intensity={100} />
-          <Plane receiveShadow args={[100, 100, 100]} rotation={[degreeToRad(-90), 0, 0]}>
-            <meshBasicMaterial color={"#fff"} />
-
-          </Plane>
           <Select box multiple onChange={setSelected}>
-            <MyTorus recieveShadow scale={0.03} position={[0, 0.1, 0]} tag={'circus'} url={"/objects/test3.fbx"} />
-            <MyTorus recieveShadow scale={0.003} position={[-2, 0.2, -2]} tag={'circus'} url={"/objects/test4.fbx"} />
+            <MyTorus recieveShadow scale={1} position={[0, 0.1, 0]} rotation={[0, degreeToRad(180), 0]} url={"/objects/eco_cream.fbx"} />
           </Select>
 
           <Light />
+          <Environment preset="studio" />
           <EffectComposer multisampling={0} autoClear={false}>
-            <Outline selection={selected} visibleEdgeColor="white" hiddenEdgeColor="white" blur edgeStrength={100} />
+            <SMAA />
+            <Outline selection={selected} visibleEdgeColor="white" hiddenEdgeColor="white" edgeStrength={100} blur blendFunction={BlendFunction.ALPHA} kernelSize={KernelSize.LARGE} />
+
           </EffectComposer>
         </Canvas>
       </div>
