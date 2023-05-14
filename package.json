@@ -1,6 +1,5 @@
 {
   "name": "prep4tomorrow",
-  "homepage": "http://p-jeff.github.io/prep4tomorrow",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
