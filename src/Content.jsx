@@ -6,10 +6,9 @@ import { useState, useEffect } from 'react';
 
 export default function Content(object) {
 
-    let insert = object.object[0].name
+    const insert = (object.object === "placeholder") ? "placeholder" : object.object[0].name;
     let url = "/markdown/" + insert + ".md"
     const [markdown, setMarkdown] = useState('');
-
 
     useEffect(() => {
         async function fetchData() {
