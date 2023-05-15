@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/prep4tomorrow/static/css/main.3b21db2b.css",
-    "main.js": "/prep4tomorrow/static/js/main.a519d907.js",
+    "main.js": "/prep4tomorrow/static/js/main.b9f9004a.js",
     "static/js/787.d70b7663.chunk.js": "/prep4tomorrow/static/js/787.d70b7663.chunk.js",
     "index.html": "/prep4tomorrow/index.html",
     "main.3b21db2b.css.map": "/prep4tomorrow/static/css/main.3b21db2b.css.map",
-    "main.a519d907.js.map": "/prep4tomorrow/static/js/main.a519d907.js.map",
+    "main.b9f9004a.js.map": "/prep4tomorrow/static/js/main.b9f9004a.js.map",
     "787.d70b7663.chunk.js.map": "/prep4tomorrow/static/js/787.d70b7663.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3b21db2b.css",
-    "static/js/main.a519d907.js"
+    "static/js/main.b9f9004a.js"
   ]
 }

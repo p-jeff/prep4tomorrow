@@ -1,0 +1,3 @@
+### Natron Toothpaste
+
+Toothpaste is reliant on quite a few chemicals, where it is not sure how they can be sourced. There are however many recipies for homemade toothpaste, using only a few commong ingredients. Through this it is likely that toothpaste just becomes a homemade product. The general recipe calls for either Baking Soda or Natron, and some kind of acid. Usually fruit get used to add a bit of flavour and texture. Common varieties are Berries, or Lemon. Together with the Natron they form a paste that easily cleanes and sometimes even bleaches teeth.
