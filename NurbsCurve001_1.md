@@ -1,3 +1,0 @@
-### Toothpaste Pills
-
-Plastic tubing for toothpaste is non reusable, and also hard to recycle since no one rinses their packaging before throwing it out. Would it not make a lot more sense to offer dried toothpaste that just needs a little water (in this case your spit), then offer it in a paper bag, or even completely unpackaged? With these you just need to chew them for a bit and then start brushing your teeth with the foam. Bonus is that nothing will get left in the package, and they are pre portioned to perfect size.
