@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 export default function Content(object) {
 
     const insert = (object.object === "placeholder") ? "placeholder" : object.object[0].name;
-    let url = "/markdown/" + insert + ".md"
+    let url = process.env.PUBLIC_URL + "/markdown/" + insert + ".md"
     const [markdown, setMarkdown] = useState('');
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function Content(object) {
 
     return (
         <div className='text'>
-            <ReactMarkdown children={markdown}></ReactMarkdown>
+            <ReactMarkdown children={markdown} className='markdown'></ReactMarkdown>
         </div>
     );
 

@@ -1,6 +1,6 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
-import { Environment, Html, MapControls, Select, useGLTF, useProgress } from '@react-three/drei';
+import { Environment, Html, MapControls, Plane, Select, useGLTF, useProgress } from '@react-three/drei';
 import { useState, Suspense } from 'react';
 import Content from './Content';
 import { EffectComposer, Outline, SMAA } from '@react-three/postprocessing';
@@ -12,7 +12,7 @@ function degreeToRad(degrees) {
 
 function Loader() {
   const { progress } = useProgress()
-  return <Html center >{progress} % loaded</Html>
+  return <Html center className='loading'>{Math.round(progress)} % loaded</Html>
 }
 
 // useSelect needs to be in a Child of <Select> 
@@ -26,6 +26,8 @@ function MyScene({ url, ...props }) {
 function App() {
   const [selected, setSelected] = useState([])
   const loader = useProgress()
+
+
   return (
     <div className='App'>
       <div className='canvas'>
@@ -34,10 +36,13 @@ function App() {
             <MapControls />
             <ambientLight intensity={0.5} />
             <Select box multiple onChange={setSelected}>
-              <MyScene recieveShadow scale={1} position={[0, 0.1, 0]} rotation={[0, degreeToRad(180), 0]} url={"/objects/scene_3.glb"} />
+              <MyScene recieveShadow castShadow scale={1} position={[0, 0.1, 0]} rotation={[0, degreeToRad(180), 0]} url={process.env.PUBLIC_URL + "/scene_3.glb"} />
             </Select>
-            <directionalLight color={"#fefeef"} intensity={1} position={[5, 5, -5]} castShadow />
-            <Environment preset="studio" />
+            <Plane receiveShadow rotation={[degreeToRad(270), 0, 0]} scale={[20, 20, 20]}>
+              <meshStandardMaterial color={'orange'} />
+            </Plane>
+            <directionalLight color={"#fefeef"} intensity={1} position={[5, 5, -5]} castShadow={true} />
+            <Environment preset="studio" castShadow={true} />
             <EffectComposer multisampling={0} autoClear={false}>
               <SMAA />
               <Outline selection={selected} visibleEdgeColor="white" hiddenEdgeColor="white" edgeStrength={100} blur blendFunction={BlendFunction.ALPHA} kernelSize={KernelSize.LARGE} />
