@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/prep4tomorrow/static/css/main.ec7c8e07.css",
-    "main.js": "/prep4tomorrow/static/js/main.e2b156e3.js",
+    "main.css": "/prep4tomorrow/static/css/main.a9309235.css",
+    "main.js": "/prep4tomorrow/static/js/main.2d573787.js",
     "static/js/787.d70b7663.chunk.js": "/prep4tomorrow/static/js/787.d70b7663.chunk.js",
     "index.html": "/prep4tomorrow/index.html",
-    "main.ec7c8e07.css.map": "/prep4tomorrow/static/css/main.ec7c8e07.css.map",
-    "main.e2b156e3.js.map": "/prep4tomorrow/static/js/main.e2b156e3.js.map",
+    "static/media/circle.svg": "/prep4tomorrow/static/media/circle.2b031a4ba1b8eae3080b.svg",
+    "main.a9309235.css.map": "/prep4tomorrow/static/css/main.a9309235.css.map",
+    "main.2d573787.js.map": "/prep4tomorrow/static/js/main.2d573787.js.map",
     "787.d70b7663.chunk.js.map": "/prep4tomorrow/static/js/787.d70b7663.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ec7c8e07.css",
-    "static/js/main.e2b156e3.js"
+    "static/css/main.a9309235.css",
+    "static/js/main.2d573787.js"
   ]
 }
