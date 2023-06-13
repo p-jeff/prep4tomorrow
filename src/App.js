@@ -1,6 +1,6 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
-import { AccumulativeShadows, Environment, Html, MapControls, Plane, Select, useGLTF, useProgress, RandomizedLight, useTexture, GizmoHelper, GizmoViewport } from '@react-three/drei';
+import { AccumulativeShadows, Environment, Html, MapControls, Plane, Select, useGLTF, useProgress, RandomizedLight, useTexture, GizmoHelper, GizmoViewport, useEnvironment } from '@react-three/drei';
 import { useState, Suspense, useEffect } from 'react';
 import Content from './Content';
 import { EffectComposer, Outline, SMAA } from '@react-three/postprocessing';
@@ -24,8 +24,10 @@ function MyScene({ url, ...props }) {
 
   const [hovered, setHovered] = useState(false)
 
+
   useEffect(() => {
-    document.body.style.cursor = hovered ? "pointer" : 'auto'
+    const element = document.querySelector('.App')
+    element.className = hovered ? "App test" : "App"
   }, [hovered])
 
   return (
@@ -77,12 +79,11 @@ function App() {
   const loader = useProgress()
 
 
-
   return (
 
     <div className='App'>
       <div className='canvas'>
-        <Canvas camera={{ position: [6, 2, 6] }} shadowMap shadows="true" >
+        <Canvas camera={{ position: [6, 2, 6] }} shadows="true" >
           <Suspense fallback={<Loader />}>
             <MapControls autoRotate autoRotateSpeed={0.2} maxDistance={10} minDistance={2} />
             <ambientLight intensity={0.5} />
@@ -95,7 +96,7 @@ function App() {
 
             <directionalLight color={"#fefeef"} intensity={0.1} position={[5, 5, -5]} castShadow />
 
-            <Environment preset="studio" />
+            <Environment preset='studio' />
 
             <AccumulativeShadows temporal frames={30} scale={100} resolution={2048} colorBlend={10} blur={5}>
               <RandomizedLight amount={8} position={[5, 5, 3]} />
@@ -116,7 +117,7 @@ function App() {
       </div>
       {
         loader.progress === 100 &&
-        < div className='content'>
+        < div className='container'>
           <Content object={selected.length === 1 ? selected : "placeholder"} />
         </div>
       }

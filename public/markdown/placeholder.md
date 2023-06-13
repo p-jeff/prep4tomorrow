@@ -9,4 +9,4 @@ There is no need for criticism since as soon a centain point of desire is reache
 
 The project imagines how the mundane parts of these futures could look like, through objects of our day to day life, in this case objects for personal hygene.
 
-Click on them to find out what they represent, or <a> Learn More </a>
+Click on the objects to find out what they represent.
