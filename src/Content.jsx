@@ -8,7 +8,17 @@ export default function Content(object) {
     const [markdown, setMarkdown] = useState('');
     const [isMore, setMore] = useState(false);
 
-    const insert = (object.object === "placeholder") ? "placeholder" : object.object[0].name;
+    let insert;
+
+    if (isMore) {
+        insert = "more";
+    } else if (object.object === "placeholder") {
+        insert = "placeholder";
+    }
+    else {
+        insert = object.object[0].name;
+    }
+
     let url = process.env.PUBLIC_URL + "/markdown/" + insert + ".md"
 
 
@@ -30,7 +40,7 @@ export default function Content(object) {
         <>
             <div className={isMore ? 'text content more' : 'text content less'}>
                 <ReactMarkdown children={markdown} className='markdown'></ReactMarkdown>
-                {insert === "placeholder" && <button id='button' onClick={handleClick}>{isMore ? 'Back' : 'Learn More'}</button>}
+                {insert !== object.object[0].name && <button id='button' onClick={handleClick}>{isMore ? 'Back' : 'Learn More'}</button >}
             </div>
 
         </>

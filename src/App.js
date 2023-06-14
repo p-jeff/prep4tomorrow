@@ -1,6 +1,6 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
-import { AccumulativeShadows, Environment, Html, MapControls, Plane, Select, useGLTF, useProgress, RandomizedLight, useTexture, GizmoHelper, GizmoViewport, useEnvironment } from '@react-three/drei';
+import { AccumulativeShadows, Environment, Html, MapControls, Plane, Select, useGLTF, useProgress, RandomizedLight, useTexture, GizmoHelper, GizmoViewport } from '@react-three/drei';
 import { useState, Suspense, useEffect } from 'react';
 import Content from './Content';
 import { EffectComposer, Outline, SMAA } from '@react-three/postprocessing';
@@ -78,7 +78,6 @@ function App() {
   const [selected, setSelected] = useState([])
   const loader = useProgress()
 
-
   return (
 
     <div className='App'>
@@ -96,9 +95,9 @@ function App() {
 
             <directionalLight color={"#fefeef"} intensity={0.1} position={[5, 5, -5]} castShadow />
 
-            <Environment preset='studio' />
+            <Environment files={process.env.PUBLIC_URL + "/studio.hdr"} />
 
-            <AccumulativeShadows temporal frames={30} scale={100} resolution={2048} colorBlend={10} blur={5}>
+            < AccumulativeShadows temporal frames={30} scale={100} resolution={2048} colorBlend={10} blur={5}>
               <RandomizedLight amount={8} position={[5, 5, 3]} />
             </AccumulativeShadows>
 
