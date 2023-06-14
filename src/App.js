@@ -24,14 +24,13 @@ function MyScene({ url, ...props }) {
 
   const [hovered, setHovered] = useState(false)
 
-
   useEffect(() => {
     const element = document.querySelector('.App')
-    element.className = hovered ? "App test" : "App"
+    element.className = hovered ? "App cursorFull" : "App"
   }, [hovered])
 
   return (
-    <primitive object={model.scene} className="prim" onPointerOver={() => setHovered(true)}
+    <primitive object={model.scene} onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)} />
   )
 }
@@ -81,7 +80,7 @@ function App() {
   return (
 
     <div className='App'>
-      <div className='canvas'>
+      <div id='canvas'>
         <Canvas camera={{ position: [6, 2, 6] }} shadows="true" >
           <Suspense fallback={<Loader />}>
             <MapControls autoRotate autoRotateSpeed={0.2} maxDistance={10} minDistance={2} />
@@ -116,11 +115,11 @@ function App() {
       </div>
       {
         loader.progress === 100 &&
-        < div className='container'>
+        < div id='container'>
           <Content object={selected.length === 1 ? selected : "placeholder"} />
         </div>
       }
-      <div className='bosom'>
+      <div id='bosom'>
         &emsp;
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-shift" viewBox="0 0 16 16">
           <path d="M 3 5.188 C 3 2.341 5.22 0 8 0 s 5 2.342 5 5.188 v 5.625 C 13 13.658 10.78 16 8 16 s -5 -2.342 -5 -5.188 V 5 z V 5.5 h 0 z m 5 -0.188 V 5.5 H 12 v -0.313 c 0 -2.152 -1.541 -3.898 -4 -4.187 z M 12 6.5 H 4 v 4.313 C 4 13.145 5.81 15 8 15 s 4 -1.855 4 -4.188 V 6.5 z" />
