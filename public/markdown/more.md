@@ -10,19 +10,23 @@ This speculative process was the groundwork of my exploration. And while creativ
 Interacting with the prototype leads to more discoveries, how does my behaviour change? How do i feel about it? Most important however is the very last step, showing the objects to other people, how do they react? What do they think? 
 The resulting discussions about personal beliefs were almost always more hands-on and way more in depth than pure ideological discussions.
 
-### The Presented Futures
+### The Presented Futures:
 
 ### Selfmade Future
 In a situation where international supply chains break down, what everyday objects would have to change? This Future imagines scarcity, and a turn away from our current life of abundance.
 Be it climate change, pandemics or wars, if international shipping is reduced to a minimum, we have to get creative. What can be used as substitutes? What can be produced locally? What can be home grown? 
+Inspired by a ship getting stuck in Suez Canal, and the toilet paper rush of 2020.
 
 ### Ecocapitalism
 How can we merge our current system with climate disaster avoidance?
 Ecocapitalism claims to have the answers. Replacing plastics with sustainable materials like wood or paper and making things recyclabe or compostable. This is seen as an easy fix to the flaws of today, without having to give up much of our comfort and luxury. Some of these products already exist today, usually with a hefty marketing budged. But is this really a solution or just treating the symptoms?
+This future was heavily inspired by modern day political discourse about climate change, meandering around the many different interest represented.
 
 ### Start-Up Future
 Can we not just invent ourselves out of our problems? According to the proponents of this future, we need not worry. Technological advancements will trickle down into our everyday lives and medical equipment will become so small, easy to operate and cheap that we can all get access to them. You just have to believe in progress.
+Inspired by the products we get sold on our daily basis, and the act of treating not just humans, but all biological processes as a machine.
 
 ### Space Future
-Why even worry about planet earth if we can just find a new place to live?
-Wo does not want to explore the final frontier? But is life among the stars really that great? What do we have to give up once were out there?
+Why even worry about planet earth if we can just find a new place to live? Wo does not want to explore the final frontier? But is life among the stars really that great? What do we have to give up once were out there?
+This future was inspired heavily by private space travel, and the big claims for a soon to be Mars expedition.
+Other than then occasional space tourist however, most of the proclaimed milestones are so far out of our reach.

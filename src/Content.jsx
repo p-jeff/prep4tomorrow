@@ -26,7 +26,7 @@ export default function Content(object) {
     return (
         <>
             <div className={isMore ? 'more' : 'less'} id='content'>
-                <ReactMarkdown children={markdown} className='markdown'></ReactMarkdown>
+                <ReactMarkdown children={markdown} className={'markdown'}></ReactMarkdown>
                 {insert !== object.object[0].name && <button id='button' onClick={handleClick}>{isMore ? 'Back' : 'Learn More'}</button >}
             </div>
 
