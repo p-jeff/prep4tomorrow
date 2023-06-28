@@ -8,3 +8,5 @@ Negative visions are only presented as transitionary periods, since no decrease 
 There is no need for criticism since as soon a certain point of desire is reached, the capitalistic nature will solve itself and inequalities will become nonexistent, allowing humanity to continue at this point of desire in perpetuity.
 
 The project imagines how the mundane parts of these futures could look like, through objects of our day to day life, in this case objects for personal hygiene.
+
+Click on the Objects to find out what they represent.
